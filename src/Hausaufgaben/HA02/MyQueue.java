@@ -1,64 +1,101 @@
 package Hausaufgaben.HA02;
 
+/**
+ * Eine Instanz dieser Klasse bildet eine Queue.
+ * 
+ * Diese Klasse ist mit Hilfe einer Queue implementiert.
+ * 
+ * @param <T> Der Typ der Elemente die in diese Queue kommen.
+ */
 public class MyQueue<T> {
+    /** Zeiger auf das erste und das letzte Element der Queue. */
     private QNode<T> front, rear;
 
+    /**
+     * Konstruktor.
+     * 
+     * Setzt this.front und this.rear auf null.
+     */
     public MyQueue() {
         this.front = this.rear = null;
     }
 
+    /**
+     * Diese Methode ist getter fuer das erste Element der Queue.
+     * 
+     * @return Das erste Elemente der Queue.
+     */
     public T getFirst() {
         return this.front.key;
     }
 
+    /**
+     * Diese Methode ist getter fuer das letzte Element der Queue.
+     * 
+     * @return Das letzte Element der Queue.
+     */
     public T getLast() {
         return this.rear.key;
     }
 
-    // Method to add an key to the queue.
+    /**
+     * Diese Methode fuegt das uebergebene ELement am Ende der Queue ein.
+     * 
+     * @param key Das anzufuegene Element.
+     */
     public void enqueue(T key) {
-
-        // Create a new LL node
+        // Erstellen einer neuen QNode für die interne Liste.
         QNode<T> temp = new QNode<T>(key);
 
-        // If queue is empty, then new node is front and rear both
+        // Wenn die Queue leer ist, ist das neue ELement sowohl das erste als auch das
+        // letzte.
         if (this.rear == null) {
             this.front = this.rear = temp;
             return;
         }
 
-        // Add the new node at the end of queue and change rear
+        // Füge das neue Element am Ende der Queue ein.
         this.rear.next = temp;
         this.rear = temp;
     }
 
+    /**
+     * Diese Methode fuegt das uebergebene Element am Anfang der Queue ein.
+     * 
+     * @param key Das einzufuegende Element.
+     */
     public void enqueueAtFront(T key) {
-        // Create a new LL node
+        // Erstellen einer neuen QNode fuer die interne Liste.
         QNode<T> temp = new QNode<T>(key);
 
-        // If queue is empty, then new node is front and rear both
+        // Wenn die Queue leer ist, ist das neue ELement sowohl das erste als auch das
+        // letzte.
         if (this.front == null) {
             this.front = this.rear = temp;
             return;
         }
 
-        // Add the new node at the end of queue and change rear
+        // Fuege das neue Element an erster Stelle ein.
         temp.next = this.front;
         this.front = temp;
     }
 
-    // Method to remove an key from queue.
+    /**
+     * Diese Methode nimmt das erste Element aus der Queue und gibt es zurueck.
+     * 
+     * @return Das bis zum Aufruf dieser Methode erste Element in der Queue.
+     */
     public T dequeue() {
-        // If queue is empty, return NULL.
+        // Wenn die Queue leer ist, gib null zurueck.
         if (this.front == null) {
             return null;
         }
 
-        // Store previous front and move front one node ahead
+        // Merke dir das erste Element und schiebe den Zeiger auf das zweite Element.
         QNode<T> temp = this.front;
         this.front = this.front.next;
 
-        // If front becomes NULL, then change rear also as NULL
+        // Wenn nur ein ELement in der Liste war, setzte auch this.rear auf null.
         if (this.front == null) {
             this.rear = null;
         }
@@ -66,20 +103,30 @@ public class MyQueue<T> {
         return temp.key;
     }
 
+    /**
+     * Diese Methode loescht alle Elemente aus der Liste.
+     */
     public void clear() {
         this.front = this.rear = null;
     }
 
+    /**
+     * Diese Methode erzeugt einen String der Form "[Element1, Element2, ...]"
+     * 
+     * @return Ein String im oben genannten Format.
+     */
     public String toString() {
-        if (this.front == null)
-        {
+        if (this.front == null) {
             return "[]";
         }
         StringBuilder res = new StringBuilder("[");
-        for (QNode node = this.front; node != null; node = node.next) {
+        for (QNode<T> node = this.front; node != null; node = node.next) {
             res.append(node.key.toString() + ", ");
         }
-        return res.delete(res.length() - 2, res.length()).append("]").toString();
+        if (res.length() > 2) {
+            res.delete(res.length() - 2, res.length());
+        }
+        return res.append("]").toString();
     }
 
 }
