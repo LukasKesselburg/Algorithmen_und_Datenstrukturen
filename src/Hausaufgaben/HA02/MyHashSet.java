@@ -46,16 +46,17 @@ public class MyHashSet<K> {
         if (!list.contains(element)) {
             list.add(element);
             this.anzahlElemente++;
-            // Erstellen von doppelt so vielen TeilListen und kopieren der Elemente
-            if (this.anzahlElemente / this.hash.length > 2) {
-                ArrayList<K>[] oldHash = this.hash;
-                this.hash = new ArrayList[this.hash.length * 2];
+        }
 
-                for (int i = 0; i < oldHash.length; i++) {
-                    if (hash[i] != null) {
-                        for (int j = 0; j < oldHash[i].size(); j++) {
-                            this.add(oldHash[i].get(j));
-                        }
+        // Erstellen von doppelt so vielen TeilListen und kopieren der Elemente
+        if (this.anzahlElemente / this.hash.length > 2) {
+            ArrayList<K>[] oldHash = this.hash;
+            this.hash = new ArrayList[this.hash.length * 2];
+
+            for (int i = 0; i < oldHash.length; i++) {
+                if (hash[i] != null) {
+                    for (int j = 0; j < oldHash[i].size(); j++) {
+                        this.add(oldHash[i].get(j));
                     }
                 }
             }
