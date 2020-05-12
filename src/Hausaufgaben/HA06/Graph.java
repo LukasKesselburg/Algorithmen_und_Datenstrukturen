@@ -174,10 +174,17 @@ public class Graph {
 		return kantenliste;
 	}
 
+	/**
+	 * Die erste Zeile bzw. Spalte des Ergebnisses (beide Index 0 stehen fuer due
+	 * Verbindungen von und zu Knoten 0, der nicht existiert, ich habe mich aber
+	 * entschieden sie nicht zu entfernen, damit die Indices uebereinstimmen.
+	 * 
+	 * @return
+	 */
 	public int[][] getAdjacencyMatrix() {
-		int[][] res = new int[this.vertexCount+1][this.vertexCount+1];
-		for (int i = 1; i < this.vertexCount+1; i++) {
-			for (int j = 1; j < this.vertexCount+1; j++) {
+		int[][] res = new int[this.vertexCount + 1][this.vertexCount + 1];
+		for (int i = 1; i < this.vertexCount + 1; i++) {
+			for (int j = 1; j < this.vertexCount + 1; j++) {
 				if (this.adj[i].contains(j)) {
 					res[i][j] = 1;
 				} else {
@@ -248,10 +255,10 @@ public class Graph {
 	public ArrayList<Integer> getUnreachableVertices(int start) {
 		boolean[] visited = new boolean[this.vertexCount + 1];
 		ArrayDeque<Integer> queue = new ArrayDeque<>();
-		
+
 		visited[start] = true;
 		queue.addLast(start);
-		
+
 		while (!queue.isEmpty()) {
 			int k = queue.pop();
 			for (int x : this.adj[k]) {
@@ -281,7 +288,7 @@ public class Graph {
 		// System.out.println(g);
 
 		System.out.println();
-		
+
 		System.out.println(Arrays.toString(g.getEdgeList().toArray()));
 		System.out.println(Arrays.toString(g.getVertexList().toArray()));
 		System.out.println(Arrays.deepToString(g.getAdjacencyMatrix()));
