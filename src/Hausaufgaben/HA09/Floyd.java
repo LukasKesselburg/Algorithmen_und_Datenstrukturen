@@ -56,17 +56,17 @@ public class Floyd {
 			
 
 		// Ausgabe
-		for (int l = 0; l < a.length; l++) {
-			for (int m = 0; m < a.length; m++) {
-				if (a[l][m] == U) {
-					System.out.print(" ---");
-				} else {
-					System.out.printf("%4d", a[l][m]);
-				}
-			}
-			System.out.println();
-		}
-		System.out.println();
+		// for (int l = 0; l < a.length; l++) {
+		// 	for (int m = 0; m < a.length; m++) {
+		// 		if (a[l][m] == U) {
+		// 			System.out.print(" ---");
+		// 		} else {
+		// 			System.out.printf("%4d", a[l][m]);
+		// 		}
+		// 	}
+		// 	System.out.println();
+		// }
+		// System.out.println();
 
 		// Floyd-Algorithmus
 		for (int i = 0; i < a.length; i++) {
